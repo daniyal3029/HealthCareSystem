@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Patient Management System</title>
+    <!-- Organic Typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700;9..144,800&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Main Styles -->
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <!-- Ambient Blobs -->
+    <div class="blob-container">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+    </div>
+
+    <div class="auth-wrapper">
+        <div class="organic-card asymmetric-1">
+            <h1 class="auth-title">Welcome Back</h1>
+            <p class="auth-subtitle">Patient Record Management System</p>
+            
+            <div id="error-alert" class="error-message"></div>
+
+            <form id="login-form">
+                <div class="form-group">
+                    <label class="form-label" for="username">Username</label>
+                    <input type="text" id="username" name="username" class="form-input" required placeholder="forest-healer">
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label" for="password">Password</label>
+                    <input type="password" id="password" name="password" class="form-input" required placeholder="••••••••">
+                </div>
+
+                <div class="form-group" style="margin-top: 2rem;">
+                    <button type="submit" class="btn btn-primary btn-full">
+                        Sign In
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('login-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const form = e.target;
+            const formData = new FormData(form);
+            const errorAlert = document.getElementById('error-alert');
+            const submitBtn = form.querySelector('button[type="submit"]');
+
+            // Reset UI
+            errorAlert.style.display = 'none';
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Authenticating...';
+
+            try {
+                const response = await fetch('../api/login.php', {
+                    method: 'POST',
+                    body: formData
+                });
+                const data = await response.json();
+
+                if (data.status === 'success') {
+                    // Redirect to dashboard after login
+                    window.location.href = 'dashboard.html';
+                } else {
+                    errorAlert.textContent = data.message || 'Login failed.';
+                    errorAlert.style.display = 'block';
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = 'Sign In';
+                }
+            } catch (error) {
+                console.error("Login fetch error:", error);
+                errorAlert.textContent = 'Server connection error. Please try again.';
+                errorAlert.style.display = 'block';
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Sign In';
+            }
+        });
+
+        // Basic auth check bypass
+        window.addEventListener('DOMContentLoaded', async () => {
+            try {
+                const res = await fetch('../api/check_auth.php');
+                const data = await res.json();
+                if(data.status === 'success') {
+                    window.location.href = 'dashboard.html';
+                }
+            } catch(e) {}
+        });
+    </script>
+</body>
+</html>
