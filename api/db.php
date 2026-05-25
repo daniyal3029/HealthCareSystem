@@ -20,4 +20,12 @@ try {
     echo json_encode(['status' => 'error', 'message' => 'Database connection failed. Please make sure the DB exists.']);
     exit;
 }
-?>
+
+/**
+ * Database connection settings
+ * @var string $host Hostname or IP address
+ * @var string $db Database name
+ * @var string $user Database username
+ * @var string $pass Database password
+ * @var string $charset Character set to use
+ */
