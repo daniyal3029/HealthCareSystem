@@ -17,7 +17,7 @@ try {
 } catch (\PDOException $e) {
     // Return early if we can't connect, helpful for frontend handling
     http_response_code(500);
-    echo json_encode(['status' => 'error', 'message' => 'Database connection failed. Please make sure the DB exists and credentials are correct.']);
+    echo json_encode(['status' => 'error', 'message' => 'Database connection failed. Please make sure the DB exists and credentials are correct. Error: ' . $e->getMessage()]);
     exit;
 }
 
