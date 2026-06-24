@@ -29,3 +29,7 @@ try {
  * @var string $pass Database password
  * @var string $charset Character set to use
  */
+/**
+ * PDO instance
+ * @var PDO $pdo
+ */
