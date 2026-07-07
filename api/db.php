@@ -33,3 +33,9 @@ try {
  * PDO instance
  * @var PDO $pdo
  */
+
+// Added documentation for connection error handling
+/**
+ * Handles database connection errors by returning a JSON error response
+ * with a 500 status code and the exception message.
+ */
