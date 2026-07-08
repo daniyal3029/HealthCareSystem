@@ -12,15 +12,6 @@ $options = [
     PDO::ATTR_EMULATE_PREPARES   => false,
 ];
 
-try {
-    $pdo = new PDO($dsn, $user, $pass, $options);
-} catch (\PDOException $e) {
-    // Return early if we can't connect, helpful for frontend handling
-    http_response_code(500);
-    echo json_encode(['status' => 'error', 'message' => 'Database connection failed. Please make sure the DB exists and credentials are correct. Error: ' . $e->getMessage()]);
-    exit;
-}
-
 /**
  * Database connection settings
  * @var string $host Hostname or IP address
@@ -34,8 +25,22 @@ try {
  * @var PDO $pdo
  */
 
-// Added documentation for connection error handling
+try {
+    $pdo = new PDO($dsn, $user, $pass, $options);
+} catch (\PDOException $e) {
+    // Return early if we can't connect, helpful for frontend handling
+    http_response_code(500);
+    echo json_encode(['status' => 'error', 'message' => 'Database connection failed. Please make sure the DB exists and credentials are correct. Error: ' . $e->getMessage()]);
+    exit;
+}
+
 /**
  * Handles database connection errors by returning a JSON error response
  * with a 500 status code and the exception message.
+ */
+
+// Added documentation for connection error handling
+/**
+ * Database connection settings and error handling.
+ * Ensure to replace the database credentials with your own.
  */
