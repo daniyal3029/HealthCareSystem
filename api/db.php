@@ -44,3 +44,12 @@ try {
  * Database connection settings and error handling.
  * Ensure to replace the database credentials with your own.
  */
+
+/**
+ * Database connection settings:
+ * - Host: $host
+ * - Database: $db
+ * - Username: $user
+ * - Password: $pass
+ * - Charset: $charset
+ */
