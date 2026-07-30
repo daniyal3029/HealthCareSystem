@@ -53,3 +53,8 @@ try {
  * - Password: $pass
  * - Charset: $charset
  */
+
+// Added documentation for PDO instance
+/**
+ * @throws \PDOException if database connection fails
+ */
