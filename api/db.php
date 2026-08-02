@@ -58,3 +58,8 @@ try {
 /**
  * @throws \PDOException if database connection fails
  */
+
+// Added documentation for database credentials
+/**
+ * @important Ensure to replace these credentials with your own for security purposes.
+ */
