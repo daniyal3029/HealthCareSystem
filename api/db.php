@@ -63,3 +63,8 @@ try {
 /**
  * @important Ensure to replace these credentials with your own for security purposes.
  */
+
+// Added documentation to remind to secure the database credentials
+/**
+ * @security Ensure the database credentials are stored securely and not hardcoded.
+ */
